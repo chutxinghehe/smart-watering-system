@@ -1,0 +1,25 @@
+app:
+  name: smart-watering-system
+  
+services:
+  - name: web
+    type: web
+    instance_type: nano
+    regions:
+      - sin
+    build:
+      builder: buildpack
+      buildpack:
+        run: cd server && gunicorn app:app --bind 0.0.0.0:$PORT
+    env:
+      - key: PYTHON_VERSION
+        value: "3.11"
+    ports:
+      - port: 8000
+        protocol: http
+    routes:
+      - path: /
+        port: 8000
+    scaling:
+      min: 1
+      max: 1
