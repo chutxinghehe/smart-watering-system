@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌱 Smart Watering System</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Chart.js library từ CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>🌱 Smart Watering System</h1>
+            <p class="subtitle">Hệ thống tưới cây tự động với AI</p>
+        </header>
+
+        <!-- Status Cards -->
+        <div class="cards-grid">
+            <!-- Soil Moisture Card -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon">💧</span>
+                    <h3>Độ ẩm đất</h3>
+                </div>
+                <div class="card-body">
+                    <div class="value-large" id="moisture-value">--</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="moisture-bar" style="width: 0%"></div>
+                    </div>
+                    <div class="status-text" id="moisture-status">Đang đọc dữ liệu...</div>
+                </div>
+            </div>
+
+            <!-- Temperature Card -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon">🌡️</span>
+                    <h3>Nhiệt độ</h3>
+                </div>
+                <div class="card-body">
+                    <div class="value-large" id="temp-value">--</div>
+                    <div class="status-text">Nhiệt độ môi trường</div>
+                </div>
+            </div>
+
+            <!-- Humidity Card -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon">☁️</span>
+                    <h3>Độ ẩm không khí</h3>
+                </div>
+                <div class="card-body">
+                    <div class="value-large" id="humidity-value">--</div>
+                    <div class="status-text">Độ ẩm tương đối</div>
+                </div>
+            </div>
+
+            <!-- Pump Control Card -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon">⚡</span>
+                    <h3>Điều khiển bơm</h3>
+                </div>
+                <div class="card-body">
+                    <div class="pump-status" id="pump-status">
+                        <span class="status-indicator" id="pump-indicator"></span>
+                        <span id="pump-text">Đang chờ...</span>
+                    </div>
+                    <div class="control-buttons">
+                        <button class="btn btn-on" onclick="controlPump('on')">
+                            BẬT BƠM
+                        </button>
+                        <button class="btn btn-off" onclick="controlPump('off')">
+                            TẮT BƠM
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart Section -->
+        <div class="chart-section">
+            <h2>📈 Lịch sử 24 giờ</h2>
+            <div class="chart-container">
+                <canvas id="historyChart"></canvas>
+            </div>
+            <div class="chart-legend">
+                <span class="legend-item">
+                    <span class="legend-color" style="background: #3b82f6"></span>
+                    Độ ẩm đất (%)
+                </span>
+                <span class="legend-item">
+                    <span class="legend-color" style="background: #ef4444"></span>
+                    Nhiệt độ (°C)
+                </span>
+                <span class="legend-item">
+                    <span class="legend-color" style="background: #10b981"></span>
+                    Độ ẩm không khí (%)
+                </span>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>Cập nhật lần cuối: <span id="last-update">--</span></p>
+            <p class="server-status">
+                Server: <span id="server-status" class="status-ok">●</span>
+            </p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

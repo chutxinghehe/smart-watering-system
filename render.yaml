@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: smart-watering
+    runtime: python
+    buildCommand: pip install -r server/requirements.txt && python server/train_model.py
+    startCommand: cd server && gunicorn app:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
